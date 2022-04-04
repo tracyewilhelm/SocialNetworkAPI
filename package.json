@@ -1,19 +1,25 @@
 {
-  "name": "Social-Network-Homework",
-  "version": "1.0.1",
-  "description": "Mongoose back-end homework",
-  "main": "index.js",
-  
+  "name": "socialnetworkapi",
+  "version": "1.0.0",
+  "description": "# 18 NoSQL: Social Network API",
+  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "watch": "nodemon server.js",
-    "seed": "node utils/seed"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tracyewilhelm/SocialNetworkAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tracyewilhelm/SocialNetworkAPI/issues"
+  },
+  "homepage": "https://github.com/tracyewilhelm/SocialNetworkAPI#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "mongoose": "^6.0.13"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.9"
+    "express": "^4.17.3",
+    "mongoose": "^6.2.10"
   }
 }
