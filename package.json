@@ -1,0 +1,19 @@
+{
+  "name": "Social-Network-Homework",
+  "version": "1.0.1",
+  "description": "Mongoose back-end homework",
+  "main": "index.js",
+  
+  "scripts": {
+    "start": "node server.js",
+    "watch": "nodemon server.js",
+    "seed": "node utils/seed"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
+  }
+}
