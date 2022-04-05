@@ -154,7 +154,7 @@ This will not be a model, but rather will be used as the `reaction` field's subd
 
 **`/api/users`**
 
-- `GET` all users
+- `GET` all users - done
 
 - `GET` a single user by its `_id` and populated thought and friend data
 
