@@ -15,7 +15,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // TODO: Add comments to the functionality of the createThought method
+
   createThought(req, res) {
     Thought.create(req.body)
       .then((thought) => {
@@ -37,7 +37,7 @@ module.exports = {
         res.status(500).json(err);
       });
   },
-  // TODO: Add comments to the functionality of the updateThought method
+
   updateThought(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -54,7 +54,7 @@ module.exports = {
         res.status(500).json(err);
       });
   },
-  // TODO: Add comments to the functionality of the deleteThought method
+
   deleteThought(req, res) {
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
       .then((thought) =>
@@ -76,6 +76,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
+  //add a reaction
   addReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -84,21 +85,22 @@ module.exports = {
     )
       .then((thought) =>
         !thought
-          ? res.status(404).json({ message: "No thought with this id!" })
+          ? res.status(404).json({ message: "No reaction with this id!" })
           : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
   },
-  // TODO: Add comments to the functionality of the addTag method
+
+  //remove a reaction
   removeReaction(req, res) {
-    Thought.findOneAndUpdate(
+    Thought.deleteOne(
       { _id: req.params.thoughtId },
-      { $pull: { tags: { tagId: req.params.tagId } } },
+      { $pull: { reaction: { reactionId: req.params.reactionId } } },
       { runValidators: true, new: true }
     )
       .then((thought) =>
         !thought
-          ? res.status(404).json({ message: "No thought with this id!" })
+          ? res.status(404).json({ message: "No reaction with this id!" })
           : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
