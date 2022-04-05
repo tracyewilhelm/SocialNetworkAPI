@@ -107,7 +107,7 @@ Create a virtual called `friendCount` that retrieves the length of the user's `f
 
   - Date
   - Set default value to the current timestamp
-  - Use a getter method to format the timestamp on query
+  - Use a getter method to format the timestamp on query - FIGURE THIS OUT
 
 - `username` (The user that created this thought)
 
