@@ -24,7 +24,7 @@ module.exports = {
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
-  // Delete a user and associated thoughts
+  // Delete a user and their associated thoughts
   deleteUser(req, res) {
     User.findOneAndDelete({ _id: req.params.userId })
       .then((user) =>
@@ -72,7 +72,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  //remove a friend - _id is user; friendId is friend you want to remove
+  //remove a friend - _id is user; friendsId is friend you want to remove
   removeFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
