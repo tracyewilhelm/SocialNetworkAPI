@@ -7,7 +7,7 @@ module.exports = {
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
-  // Get a single user
+  // Get a single user based on their id
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
       .select("-__v")
@@ -18,7 +18,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // create a new user
+  // create a new user - requires username and email
   createUser(req, res) {
     User.create(req.body)
       .then((user) => res.json(user))
@@ -33,13 +33,16 @@ module.exports = {
           : Thought.deleteMany({ _id: { $in: user.thoughts } })
       )
       .then(() =>
-        res.json({ message: "User and associated Thoughts deleted!" })
+        res.json({
+          message:
+            "You've hit the delete user route - User and associated Thoughts deleted!",
+        })
       )
       .catch((err) => res.status(500).json(err));
   },
-  //update a user
+  //update a user where you find the user by the url and update the information in the body
   updateUser(req, res) {
-    User.finOneAndUpdate(
+    User.findOneAndUpdate(
       { _id: req.params.userId },
       { $set: req.body },
       { runValidators: true, new: true }
@@ -55,31 +58,31 @@ module.exports = {
       });
   },
 
-  //add a friend
+  //add a friend - the id in the url is the user you want to add the friend to; the id in the body is the friend you want to add to the user
   addFriend(req, res) {
     User.findOneAndUpdate(
-      { _id: req.params.friendId },
+      { _id: req.params.userId },
       { $addToSet: { friends: req.body } },
       { runValidators: true, new: true }
     )
       .then((user) =>
         !user
-          ? res.status(404).json({ message: "No friend with this id!" })
+          ? res.status(404).json({ message: "No user with this id!" })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
-  //remove a friend
+  //remove a friend - _id is user; friendId is friend you want to remove
   removeFriend(req, res) {
-    User.deleteOne(
-      { _id: req.params.friendId },
-      { $pull: { friends: { friendId: req.params.friendId } } },
+    User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $pull: { friends: { friends: req.params.friendsId } } },
       { runValidators: true, new: true }
     )
-      .then((user) =>
-        !user
-          ? res.status(404).json({ message: "No friend with this id!" })
-          : res.json(user)
+      .then(() =>
+        res.json({
+          message: "This is the removeFriend route - Friend has been removed!",
+        })
       )
       .catch((err) => res.status(500).json(err));
   },
