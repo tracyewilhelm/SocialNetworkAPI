@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
+const moment = require("moment");
 
-//create the base model for a reaction
+//create the base model for a Reaction
 const reactionSchema = new Schema(
   {
     reactionId: {
@@ -16,7 +17,12 @@ const reactionSchema = new Schema(
       type: String,
       required: true,
     },
-    createdAt: { type: Date, default: Date.now },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: (createdAtVal) =>
+        moment(createdAtVal).format("MMMM Do YYYY, [at] hh:mm a"),
+    },
   },
   {
     toJSON: {
