@@ -15,3 +15,5 @@ db.once("open", () => {
     console.log(`API server running on port ${PORT}!`);
   });
 });
+
+//boiler plate server start up and connection to the mongo db using the import from config

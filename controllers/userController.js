@@ -1,5 +1,5 @@
 const { User, Thought } = require("../models");
-
+//export all of these functions. We are sending them to the users routes
 module.exports = {
   // Get all users
   getUsers(req, res) {
@@ -7,7 +7,7 @@ module.exports = {
       .then((users) => res.json(users))
       .catch((err) => res.status(500).json(err));
   },
-  // Get a single user based on their id
+  // Get a single user based on the userId that is provided in the url
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
       .select("-__v")
@@ -18,13 +18,13 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // create a new user - requires username and email
+  // create a new user - requires username and email in the body of the post
   createUser(req, res) {
     User.create(req.body)
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
-  // Delete a user and their associated thoughts
+  // Delete a user and their associated thoughts based on the userId provided in the url
   deleteUser(req, res) {
     User.findOneAndDelete({ _id: req.params.userId })
       .then((user) =>
@@ -40,7 +40,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  //update a user where you find the user by the url and update the information in the body
+  //update a user where you find the user by the url and provide the updated information in the body
   updateUser(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
@@ -72,7 +72,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  //remove a friend - _id is user; friendsId is friend you want to remove
+  //remove a friend - _id is userId provided in the url; friendsId is friend you want to remove, and the id is also provided in the url
   removeFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },

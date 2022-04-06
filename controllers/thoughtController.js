@@ -1,13 +1,13 @@
 const { User, Thought } = require("../models");
 
 module.exports = {
-  //get all thoughts
+  //get all thoughts function that says look for a thing called Thoughts and return what is in there
   getThoughts(req, res) {
     Thought.find()
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
-  //get a single Thought based on the thoughtId
+  //get a single Thought based on the thoughtId that is provided in the url
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
       .then((thought) =>
@@ -58,7 +58,7 @@ module.exports = {
         res.status(500).json(err);
       });
   },
-  //delete a particular thought based on the thought id, with the assumption that eac thought, no matter the user, will have a unique id
+  //delete a particular thought based on the thought id, with the assumption that each thought, no matter the user, will have a unique id
   deleteThought(req, res) {
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
       .then((thought) =>
@@ -69,7 +69,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  //add a reaction where the id in the url is the Thought you want to add a Reaction to; the id in the body is the Reaction you want to add to the Thought
+  //add a reaction where the id in the url is the Thought you want to add a Reaction to; the id in the body is created and connected to the Reaction you want to add to the Thought (see Reaction model for creation of id)
   addReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -84,7 +84,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
-  //remove a reaction based on the reaction id and the associated thought id
+  //remove a reaction based on the reaction id and the associated thought id. Find a thought with the provided thoughtId and then find within that thought a reaction with the provided reactionId. Delete just that reaction.
   removeReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },

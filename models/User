@@ -11,6 +11,7 @@ const userSchema = new Schema(
       required: true,
       trim: true,
     },
+    //email is required, and to prevent users from putting in gibberish, it must comply with the email regex
     email: {
       type: String,
 

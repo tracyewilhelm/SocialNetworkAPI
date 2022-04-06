@@ -1,4 +1,5 @@
 const router = require("express").Router();
+//all of these functions are provided by the export/require of userController.
 const {
   getUsers,
   getSingleUser,
@@ -9,16 +10,16 @@ const {
   removeFriend,
 } = require("../../controllers/userController");
 
-//api/users
+//api/users - get and post routes for this url
 router.route("/").get(getUsers).post(createUser);
 
-// /api/user/:userId/friends/:friendId
+// /api/user/:userId/friends/:friendId - delete route for this url
 router.route("/:userId/friends/:friendsId").delete(removeFriend);
 
-// /api/users/:userId
+// /api/users/:userId - get, delete, and put routes for this url
 router.route("/:userId").get(getSingleUser).delete(deleteUser).put(updateUser);
 
-// /api/users/:userId/friends/ - add a friend
+// /api/users/:userId/friends/ - add a friend - post route for this url
 router.route("/:userId/friends").post(addFriend);
 
 module.exports = router;
